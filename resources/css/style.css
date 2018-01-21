@@ -1,0 +1,48 @@
+/* Universal styles */
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: "Work sans", sans-serif;
+  background-color: rgb(255,242, 242);
+}
+
+h1, h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: rgb(32, 64, 86);
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+p{
+  color: rgb(74, 74, 74);
+}
+
+/* Game box */
+
+#game {
+  margin-top: 5.25rem;
+}
+
+.card {
+  width: 12.5rem;
+  height: 12.5rem;
+  border: 4px solid #ffffff;
+  border-radius: 9px;
+  background-color: rgb(32, 64, 86);
+  font-weight: 900;
+  font-size: 7rem;
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:hover {
+  cursor: pointer;
+}
