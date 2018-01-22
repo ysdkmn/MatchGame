@@ -9,8 +9,23 @@ var MatchGame = {};
   Generates and returns an array of matching card values.
  */
 
-MatchGame.generateCardValues = function () {
+MatchGame.generateCardValues = function() {
+  var deck = [];
+  while (deck.length < 16) {
+    var x = Math.floor((Math.random() * 10) + 1);
 
+    function numberCheck(num) {
+      return num == x;
+      console.log (num == x);
+    }
+
+    if (x <= 8) {
+      if (deck.filter(numberCheck).length < 2) {
+        deck.push(x);
+      }
+    }
+  }
+  return deck;
 };
 
 /*
