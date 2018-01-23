@@ -46,3 +46,7 @@ p{
 .card:hover {
   cursor: pointer;
 }
+
+button {
+  margin-top: 20px;
+}

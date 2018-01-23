@@ -111,3 +111,11 @@ MatchGame.flipCard = function($card, $game) {
     $game.data('flippedCards', []);
   }
 };
+
+/* Restarts the game with new random card locations, resets time clock, and resets move counter */
+
+$('.restart').click(function() {
+  var $game = $('#game');
+  var values = MatchGame.generateCardValues();
+  MatchGame.renderCards(values, $game);
+})
