@@ -87,12 +87,27 @@ MatchGame.flipCard = function($card, $game) {
     .css('background-color', $card.data('color'))
     .text($card.data('value'));
 
-  /*var flippedCards = $game.data('flippedCards');*/
-  var flippedCards=[]
+  var flippedCards = $game.data('flippedCards');
   flippedCards.push($card);
-  var testVal = []
-  for (var i = 0; i < flippedCards.length; i++) {
-    testVal.push(flippedCards[i].data('value'));
-  };
-  console.log(testVal);
+
+  if (flippedCards.length === 2) {
+    if (flippedCards[0].data('value') === flippedCards[1].data('value')) {
+      var matchCss = {
+        'background-color': 'rgb(153, 153, 153)',
+        'color': 'rgb(204,204,204)'
+      };
+      flippedCards[0].css(matchCss);
+      flippedCards[1].css(matchCss);
+    } else {
+      window.setTimeout(function() {
+        flippedCards[0].data('isFlipped', false)
+          .css('background-color', 'rgb(32, 64, 86)')
+          .text('');
+        flippedCards[1].data('isFlipped', false)
+        flippedCards[1].css('background-color', 'rgb(32, 64, 86)')
+          .text('');
+      }, 350);
+    }
+    $game.data('flippedCards', []);
+  }
 };
