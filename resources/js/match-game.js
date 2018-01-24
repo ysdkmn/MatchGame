@@ -7,6 +7,7 @@ var MatchGame = {};
 
 $(document).ready(function() {
   var $game = $('#game');
+  $game.data('moveCount',0);
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
 });
@@ -67,8 +68,14 @@ MatchGame.renderCards = function(cardValues, $game) {
     $game.append($cardElement);
 
     $('.card').click(function() {
+      MatchGame.moveCounter($(this), $('#game'));
       MatchGame.flipCard($(this), $('#game'));
     });
+
+  /* set cardElement height to equal dynamic width */
+
+  var cardWidth = $('.card').width();
+  $('.card').css('height', cardWidth);
   }
 
 };
@@ -112,10 +119,29 @@ MatchGame.flipCard = function($card, $game) {
   }
 };
 
+/* Counts number of moves a player makes until game is won */
+
+MatchGame.moveCounter = function($card, $game) {
+  if ($card.data('isFlipped')) {
+    return;
+  }
+
+  var flippedCards = $game.data('flippedCards');
+
+  if (flippedCards.length === 1){
+    moveCount = $game.data('moveCount');
+    moveCount += 1;
+    $('#moves').text(moveCount);
+    $game.data('moveCount', moveCount);
+  }
+};
+
 /* Restarts the game with new random card locations, resets time clock, and resets move counter */
 
 $('.restart').click(function() {
   var $game = $('#game');
+  $game.data('moveCount',0);
+  $('#moves').text(0);
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
 })
