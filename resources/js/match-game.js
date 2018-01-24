@@ -7,9 +7,11 @@ var MatchGame = {};
 
 $(document).ready(function() {
   var $game = $('#game');
-  $game.data('moveCount',0);
+  $game.data('moveCount', 0);
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
+  cardSize();
+  $(window).resize(cardSize);
 });
 /*
   Generates and returns an array of matching card values.
@@ -72,12 +74,17 @@ MatchGame.renderCards = function(cardValues, $game) {
       MatchGame.flipCard($(this), $('#game'));
     });
 
-  /* set cardElement height to equal dynamic width */
 
-  var cardWidth = $('.card').width();
-  $('.card').css('height', cardWidth);
   }
 
+
+};
+
+/* set cardElement height to equal width */
+
+function cardSize(){
+  var cardHeight = $('.card').innerWidth();
+  $('.card').css('height', cardHeight);
 };
 
 /*
@@ -128,7 +135,7 @@ MatchGame.moveCounter = function($card, $game) {
 
   var flippedCards = $game.data('flippedCards');
 
-  if (flippedCards.length === 1){
+  if (flippedCards.length === 1) {
     moveCount = $game.data('moveCount');
     moveCount += 1;
     $('#moves').text(moveCount);
@@ -140,8 +147,9 @@ MatchGame.moveCounter = function($card, $game) {
 
 $('.restart').click(function() {
   var $game = $('#game');
-  $game.data('moveCount',0);
+  $game.data('moveCount', 0);
   $('#moves').text(0);
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
+  cardSize();
 })
