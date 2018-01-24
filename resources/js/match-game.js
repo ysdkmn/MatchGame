@@ -7,7 +7,9 @@ var MatchGame = {};
 
 $(document).ready(function() {
   var $game = $('#game');
-  $game.data('moveCount', 0);
+  $game.data('moveCount', 0)
+    .data('flippedPairs', 0);
+
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
   cardSize();
@@ -82,7 +84,7 @@ MatchGame.renderCards = function(cardValues, $game) {
 
 /* set cardElement height to equal width */
 
-function cardSize(){
+function cardSize() {
   var cardHeight = $('.card').innerWidth();
   $('.card').css('height', cardHeight);
 };
@@ -112,6 +114,11 @@ MatchGame.flipCard = function($card, $game) {
       };
       flippedCards[0].css(matchCss);
       flippedCards[1].css(matchCss);
+
+      /* store pair, check for win and run win sequence if true */
+      $game.data('flippedPairs', $game.data('flippedPairs')+1);
+      MatchGame.winSequence($game);
+
     } else {
       window.setTimeout(function() {
         flippedCards[0].data('isFlipped', false)
@@ -153,3 +160,13 @@ $('.restart').click(function() {
   MatchGame.renderCards(values, $game);
   cardSize();
 })
+
+/* Runs win sequence once all pairs are matched */
+
+MatchGame.winSequence = function($game) {
+  $game.data('flippedPairs',8);
+  if ($game.data('flippedPairs') !== 8) {
+      return;
+    }
+  console.log('win!');
+};

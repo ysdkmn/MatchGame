@@ -5,6 +5,7 @@ MatchGameTests.runTests = function() {
   MatchGameTests.testGenerateCardValues(errors);
   MatchGameTests.testRenderCards(errors);
   MatchGameTests.testFlipCard(errors);
+  MatchGameTests.testWinSequence(errors);
   MatchGameTests.logErrors(errors);
 };
 
@@ -183,5 +184,13 @@ MatchGameTests.logErrors = function(errors) {
     errors.forEach(function(error) {
       console.log('%c  ' + error, 'color: #BA1222');
     });
+  }
+};
+
+MatchGameTests.testWinSequence = function(errors) {
+  var hasWinSequence = MatchGame.winSequence && typeof MatchGame.winSequence === 'function';
+  if (!hasWinSequence) {
+    errors.push("winSequence: MatchGame object should have a function called WinSequence.")
+    return
   }
 };
