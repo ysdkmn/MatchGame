@@ -74,11 +74,7 @@ MatchGame.renderCards = function(cardValues, $game) {
       MatchGame.moveCounter($(this), $('#game'));
       MatchGame.flipCard($(this), $('#game'));
     });
-
-
   }
-
-
 };
 
 /* set cardElement height to equal width */
