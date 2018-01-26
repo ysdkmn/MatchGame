@@ -9,7 +9,6 @@ $(document).ready(function() {
   var $game = $('#game');
   $game.data('moveCount', 0)
     .data('flippedPairs', 0);
-
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
   cardSize();
@@ -116,7 +115,7 @@ MatchGame.flipCard = function($card, $game) {
       flippedCards[1].css(matchCss);
 
       /* store pair, check for win and run win sequence if true */
-      $game.data('flippedPairs', $game.data('flippedPairs')+1);
+      $game.data('flippedPairs', $game.data('flippedPairs') + 1);
       MatchGame.winSequence($game);
 
     } else {
@@ -145,7 +144,7 @@ MatchGame.moveCounter = function($card, $game) {
   if (flippedCards.length === 1) {
     moveCount = $game.data('moveCount');
     moveCount += 1;
-    $('#moves').text(moveCount);
+    $('.moves').text(moveCount);
     $game.data('moveCount', moveCount);
   }
 };
@@ -155,7 +154,7 @@ MatchGame.moveCounter = function($card, $game) {
 $('.restart').click(function() {
   var $game = $('#game');
   $game.data('moveCount', 0);
-  $('#moves').text(0);
+  $('.moves').text(0);
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
   cardSize();
@@ -164,9 +163,14 @@ $('.restart').click(function() {
 /* Runs win sequence once all pairs are matched */
 
 MatchGame.winSequence = function($game) {
-  $game.data('flippedPairs',8);
   if ($game.data('flippedPairs') !== 8) {
-      return;
-    }
-  console.log('win!');
+    return;
+  }
+  $('#win').css('display', 'flex');
 };
+
+/* Remove win display with a click */
+
+$('#win').click(function() {
+  $('#win').css('display', 'none');
+});
