@@ -102,17 +102,13 @@ button {
   font-size: 4rem;
 }
 
-#win .face-up-4 {
-  background-color: hsl(160, 85%, 65%);
-  color: rgb(255, 255, 255);
+@media only screen and (max-width: 992px) {
+  #win .container {
+    width: 400px;
+  }
 }
 
-#win .face-up-7 {
-  background-color: hsl(310, 85%, 65%);
-  color: rgb(255, 255, 255);
-}
-
-#win .face-up-match {
+#win .face-up {
   background-color: rgb(153, 153, 153);
   color: rgb(204, 204, 204);
 }
@@ -126,6 +122,21 @@ button {
   border-radius: 9px;
 }
 
+#win .container div:nth-child(1) .text-box {
+  background-color: hsl(220, 85%, 65%);
+}
+#win .container div:nth-child(2) .text-box {
+  background-color: hsl(160, 85%, 65%);
+}
+#win .container div:nth-child(3) .text-box {
+  background-color: hsl(310, 85%, 65%);
+}
+
 #win h1 {
+  color: rgb(255, 255, 255);
   margin:0;
+}
+
+#win h2 {
+  color: rgb(255, 255, 255);
 }
