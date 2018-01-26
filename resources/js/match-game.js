@@ -6,9 +6,13 @@ var MatchGame = {};
 */
 
 $(document).ready(function() {
+  var seconds = 0;
+  var minutes = 0;
+
   var $game = $('#game');
   $game.data('moveCount', 0)
     .data('flippedPairs', 0);
+
   var values = MatchGame.generateCardValues();
   MatchGame.renderCards(values, $game);
   cardSize();
@@ -145,23 +149,33 @@ MatchGame.moveCounter = function($card, $game) {
   }
 };
 
-/* Restarts the game with new random card locations, resets time clock, and resets move counter */
+/* Sets game timer */
 
-$('.restart').click(function() {
-  var $game = $('#game');
-  $game.data('moveCount', 0);
-  $('.moves').text(0);
-  var values = MatchGame.generateCardValues();
-  MatchGame.renderCards(values, $game);
-  cardSize();
-})
+var seconds = 0;
+var minutes = 0;
+
+$('#game').one('click', function() {
+    var timeInterval = setInterval(function() {
+      seconds++;
+      if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+      }
+      $('.minutes').text(minutes);
+      $('.seconds').text(seconds);
+    }, 1000);
+    $('#game').data('timer',timeInterval);
+});
+
 
 /* Runs win sequence once all pairs are matched */
 
-MatchGame.winSequence = function($game) {
+MatchGame.winSequence = function($game, timeInterval) {
   if ($game.data('flippedPairs') !== 8) {
     return;
   }
+  clearInterval($game.data('timer'));
+
   $('#win').css('display', 'flex');
 };
 
@@ -170,3 +184,22 @@ MatchGame.winSequence = function($game) {
 $('#win').click(function() {
   $('#win').css('display', 'none');
 });
+
+/* Restarts the game with new random card locations, resets time clock, and resets move counter */
+
+$('.restart').click(function() {
+  var seconds = 0;
+  var minutes = 0;
+
+  var $game = $('#game');
+  $game.data('moveCount', 0)
+    .data('flippedPairs', 0);
+
+  var values = MatchGame.generateCardValues();
+  MatchGame.renderCards(values, $game);
+  cardSize();
+
+  $('.moves').text(0);
+  $('.minutes').text(0);
+  $('.seconds').text(0);
+})
