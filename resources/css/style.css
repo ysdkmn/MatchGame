@@ -45,6 +45,12 @@ p{
   cursor: pointer;
 }
 
+@media only screen and (max-width: 550px) {
+  .card {
+    font-size: 5rem;
+  }
+}
+
 /* Stats section */
 
 .stats {
